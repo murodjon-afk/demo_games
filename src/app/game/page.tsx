@@ -12,94 +12,87 @@ export default function Home() {
         backgroundColor: '#000',
         minHeight: '100vh',
         fontFamily: 'Arial, sans-serif',
-        
       }}
-      
     >
-      <div className="w-[90%] mx-[auto] flex-col"   style={{
-    display: 'flex',
-    justifyContent: 'center'
-
-  }}>
-        <h1
-        style={{
-          color: '#fff',
-          fontSize: '48px',
-          fontWeight: 700,
-          textAlign: 'left',
-margin: '0 auto',
-          textShadow: '2px 2px 8px rgba(0,0,0,0.7)',
-          letterSpacing: '1px'
-        }}
-      >
-        Игры
-      </h1>
-
-      {/* Сетка карточек */}
       <div
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, 200px)', // фиксированная ширина карточки
-          gap: '40px',
-          maxWidth: '100%',
           margin: '0 auto',
-          justifyContent: 'center' // карточки прижаты к левому краю
-          
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
+        className=' w-[90%]'
       >
-        {games.map((game) => (
-          <Link
-            key={game.slug}
-            href={`/game/${game.slug}`}
-            style={{
-              position: 'relative',
-              width: '220px',          // фиксированная ширина
-              aspectRatio: '1 / 1',    // квадрат
-              borderRadius: '12px',
-              overflow: 'hidden',
-              textDecoration: 'none',
-              color: '#fff',
-              backgroundColor: '#111',
-              cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.6)',
-              transition: 'transform 0.2s, box-shadow 0.2s'
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.transform = 'scale(1.05)';
-              el.style.boxShadow = '0 8px 20px rgba(0,0,0,0.8)';
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.transform = 'scale(1)';
-              el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.6)';
-            }}
-          >
-            <Image
-              src={game.thumbnail}
-              alt={game.title}
-              fill
-              style={{ objectFit: 'cover' }}
-              sizes="220px"
-            />
+    <h1 className="text-white font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-10 tracking-wide drop-shadow-[2px_2px_8px_rgba(0,0,0,0.7)]">
+  Игры
+</h1>
 
-            <div
+
+        {/* Сетка карточек */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+            gap: '20px',
+            width: '100%',
+          }}
+          className=' w-[100%]'
+        >
+          {games.map((game) => (
+            <Link
+              key={game.slug}
+              href={`/game/${game.slug}`}
               style={{
-                position: 'absolute',
-                bottom: 0,
+                position: 'relative',
                 width: '100%',
-                padding: '8px',
-                textAlign: 'center',
-                fontWeight: 'bold',
-                fontSize: '16px',
-                background: 'rgba(26,26,26,0.85)'
+                aspectRatio: '1 / 1',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                textDecoration: 'none',
+                color: '#fff',
+                backgroundColor: '#111',
+                cursor: 'pointer',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.6)',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLAnchorElement;
+                el.style.transform = 'scale(1.05)';
+                el.style.boxShadow = '0 8px 20px rgba(0,0,0,0.8)';
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLAnchorElement;
+                el.style.transform = 'scale(1)';
+                el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.6)';
               }}
             >
-              {game.title}
-            </div>
-          </Link>
-        ))}
-      </div>
+              <Image
+                src={game.thumbnail}
+                alt={game.title}
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  width: '100%',
+                  padding: '8px',
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  fontSize: '14px',
+                  background: 'rgba(26,26,26,0.85)',
+                  overflow: 'hidden',
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                }}
+              >
+                {game.title}
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
