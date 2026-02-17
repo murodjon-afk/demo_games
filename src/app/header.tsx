@@ -176,15 +176,45 @@ export default function Header() {
         </nav>
 
           <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                <h2 className="text-2xl font-bold text-green-500">Контакты</h2>
-                <p className="text-white/90">Email: contact@demogames.com</p>
-                <p className="text-white/90">Телефон: +998 88 460 65 75</p>
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  className="mt-4 px-4 py-2 bg-green-500 text-black font-bold rounded hover:bg-green-400 transition"
-                >
-                  Закрыть
-                </button>
+                <h2 className="text-2xl font-bold text-green-500 mb-4">Контакты</h2>
+               
+                 <div className="flex flex-col gap-3">
+                   {/* Email */}
+                   <div className="flex items-center gap-2 text-white/90">
+                     <Image src="/email.webp" alt="Email" width={24} height={24} />
+                     <span>muro21601@gmail.com</span>
+                   </div>
+               
+               
+               <a
+                 href="https://www.instagram.com/muro__m_m/"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="flex items-center gap-2 text-white/90 hover:text-green-500 transition"
+               >
+                 <Image src="/insta.avif" alt="Instagram" width={24} height={24} />
+                 <span>Связаться через инстаграмм </span>
+               </a>
+               
+               {/* Telegram */}
+               <a
+                 href="https://t.me/muro_tojik"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="flex items-center gap-2 text-white/90 hover:text-green-500 transition"
+               >
+                 <Image src="/tg.jpg" alt="Telegram" width={24} height={24} />
+                 <span>Связаться через телеграмм </span>
+               </a>
+               
+                 </div>
+               
+                 <button
+                   onClick={() => setIsModalOpen(false)}
+                   className="mt-4 px-4 py-2 bg-green-500 text-black font-bold rounded hover:bg-green-400 transition"
+                 >
+                   Закрыть
+                 </button>
               </Modal>
       </div>
     </>

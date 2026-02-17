@@ -1,6 +1,7 @@
 'use client'
 
-import { ReactNode } from "react"
+import { ReactNode, useEffect } from "react"
+import { createPortal } from "react-dom"
 
 interface ModalProps {
   isOpen: boolean
@@ -9,30 +10,36 @@ interface ModalProps {
 }
 
 export default function Modal({ isOpen, onClose, children }: ModalProps) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [isOpen])
+
   if (!isOpen) return null
 
-  return (
-    <div
-      className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 sm:p-6"
-      onClick={onClose} // закрытие при клике на фон
-    >
+  return createPortal(
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center">
+      {/* затемнение */}
       <div
-        className="
-          bg-black 
-          border-2 border-green-500 
-          rounded-lg 
-          p-6 
-          w-full 
-          max-w-md 
-          sm:max-w-sm 
-          xs:max-w-[90%] 
-          text-center 
-          space-y-4
-          "
-        onClick={(e) => e.stopPropagation()} // предотвращаем закрытие при клике внутри модалки
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* контент */}
+      <div
+        className="relative bg-black border-2 border-green-500 rounded-xl p-6 w-full max-w-md text-center space-y-4 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
       >
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
