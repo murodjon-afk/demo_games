@@ -33,7 +33,7 @@ export default function Home() {
 
         {/* Текст и Лого (на мобильных сверху) */}
         <div className="flex flex-col items-start space-y-6 w-full md:w-1/2">
-          <div className="w-40 h-40 sm:w-52 sm:h-52 md:w-60 md:h-60 relative rounded-full">
+          <div className="w-40 h-40 sm:w-52 sm:h-52 md:w-60 md:h-60 relative rounded-full border-4 border-green-500 ">
             <Image
               src="/logo.png"
               alt="GameHub Logo"
@@ -42,7 +42,7 @@ export default function Home() {
             />
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight text-green-400">
             DEMO GAMES
           </h1>
           

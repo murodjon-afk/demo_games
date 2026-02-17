@@ -35,11 +35,11 @@ export default function NotFound() {
         </h1>
 
         <p className="text-xl md:text-2xl mb-4 font-semibold">
-          Level Not Found 👾
+          Ничего не найдено 👾
         </p>
 
         <p className="text-gray-400 mb-8">
-          The mascot searched everywhere… but this page doesn’t exist.
+          Демо искал везде , но нигде не нашол страницу
         </p>
 
         <Link
@@ -48,7 +48,7 @@ export default function NotFound() {
                      font-semibold hover:bg-green-400 
                      transition hover:scale-105 duration-300 shadow-lg"
         >
-          Return to DemoGames
+          Возвращаться 
         </Link>
 
       </div>

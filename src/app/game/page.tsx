@@ -21,9 +21,9 @@ export default function Home() {
           flexDirection: 'column',
           alignItems: 'center',
         }}
-        className=' w-[90%]'
+        className=' w-[90%] text-left'
       >
-    <h1 className="text-white font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-10 tracking-wide drop-shadow-[2px_2px_8px_rgba(0,0,0,0.7)]">
+    <h1 className="text-white font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-left mb-10 tracking-wide drop-shadow-[2px_2px_8px_rgba(0,0,0,0.7)]">
   Игры
 </h1>
 
