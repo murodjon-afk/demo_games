@@ -4,10 +4,13 @@ import Link from "next/link";
 import Image from "next/image"
 import Modal from "./modal" // путь к компоненту модалки
 import { useState} from "react";
+import { translations } from "./translate/translation";
+import { useLanguage } from "./translate/LanguageContext";
 
 export default function Footer() {
     const [isModalOpen, setIsModalOpen] = useState(false)
-  
+    const { lang } = useLanguage();
+
   return (
     <footer
       className="text-white py-8 bg-cover bg-center"
@@ -33,14 +36,15 @@ export default function Footer() {
 
         {/* Навигация */}
         <div className="flex space-x-6 mb-4 md:mb-0">
-          <Link href="/" className="hover:text-green-500 transition">Главная</Link>
-          <Link href="/game" className="hover:text-green-500 transition">Игры</Link>
-          <Link href="/about" className="hover:text-green-500 transition">О нас</Link>
+          <Link href="/" className="hover:text-green-500 transition">{translations[lang].home}</Link>
+          <Link href="/game" className="hover:text-green-500 transition">                 {translations[lang].games}</Link>
+          <Link href="/about" className="hover:text-green-500 transition">                 {translations[lang].about}</Link>
 <button
   className="hover:text-green-500 transition"
   onClick={() => setIsModalOpen(true)}
 >
-  Контакты
+                   {translations[lang].contactsTitle}
+
 </button>
         </div>
 
@@ -48,13 +52,14 @@ export default function Footer() {
 
       {/* Нижняя строка */}
       <div className="mt-6 text-center text-green-500 text-sm">
-        &copy; {new Date().getFullYear()} Game Hub. Все права защищены.
+                 {translations[lang].footerRights}
+
         <br />
-        Игры из madkidgames.com
+                 {translations[lang].footermadkid}
       </div>
 
    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-  <h2 className="text-2xl font-bold text-green-500 mb-4">Контакты</h2>
+  <h2 className="text-2xl font-bold text-green-500 mb-4">                   {translations[lang].contactsTitle}</h2>
 
   <div className="flex flex-col gap-3">
     {/* Email */}
@@ -71,7 +76,7 @@ export default function Footer() {
   className="flex items-center gap-2 text-white/90 hover:text-green-500 transition"
 >
   <Image src="/insta.avif" alt="Instagram" width={24} height={24} />
-  <span>Связаться через инстаграмм </span>
+  <span>                   {translations[lang].contactsInstagram} </span>
 </a>
 
 {/* Telegram */}
@@ -82,7 +87,7 @@ export default function Footer() {
   className="flex items-center gap-2 text-white/90 hover:text-green-500 transition"
 >
   <Image src="/tg.jpg" alt="Telegram" width={24} height={24} />
-  <span>Связаться через телеграмм </span>
+  <span>                   {translations[lang].contactsTelegram}</span>
 </a>
 
   </div>
@@ -91,7 +96,7 @@ export default function Footer() {
     onClick={() => setIsModalOpen(false)}
     className="mt-4 px-4 py-2 bg-green-500 text-black font-bold rounded hover:bg-green-400 transition"
   >
-    Закрыть
+                   {translations[lang].close}
   </button>
 </Modal>
 

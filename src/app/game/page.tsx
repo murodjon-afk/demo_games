@@ -3,8 +3,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { games } from '../data/games';
-
+import { translations } from "../translate/translation";
+import { useLanguage } from "../translate/LanguageContext";
 export default function Home() {
+        const { lang } = useLanguage();
+  
   return (
     <div
       style={{
@@ -24,7 +27,7 @@ export default function Home() {
         className=' w-[90%] text-left'
       >
     <h1 className="text-white font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-left mb-10 tracking-wide drop-shadow-[2px_2px_8px_rgba(0,0,0,0.7)]">
-  Игры
+  {translations[lang].games}    
 </h1>
 
 

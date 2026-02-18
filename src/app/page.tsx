@@ -1,10 +1,11 @@
 'use client' 
 import Link from 'next/link'
-import { useRef, useEffect } from "react";
+import { useRef, useEffect  } from "react";
 import { Oswald } from "next/font/google";
 import Image from "next/image"
 import GameCarousel from '../app/GameCarousel'
-
+import { translations } from "./translate/translation";
+import { useLanguage } from "./translate/LanguageContext";
 const oswald = Oswald({ 
   subsets: ['latin'], 
   weight: ['400','500','700']
@@ -12,7 +13,7 @@ const oswald = Oswald({
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
-
+      const { lang } = useLanguage();
   useEffect(() => {
     if (videoRef.current) {
       const playPromise = videoRef.current.play();
@@ -52,15 +53,13 @@ export default function Home() {
           </h1>
           
           <p className={`text-base sm:text-lg md:text-2xl lg:text-3xl opacity-80 w-full md:w-[500px] ${oswald.className}`}>
-            Добро пожаловать на наш игровой портал! Здесь вы найдёте последние новости игровой индустрии, обзоры игр, гайды и эксклюзивные материалы. Идеальное место для всех геймеров, от новичков до профи.
-          </p>
+   {translations[lang].heroDescription}          </p>
           
           <Link
             href="/game"
             className="px-6 sm:px-8 md:px-10 py-3 sm:py-4 bg-green-500 rounded-lg text-base sm:text-lg md:text-xl font-semibold hover:bg-green-400 transition"
           >
-            Играть Игры
-          </Link>
+{translations[lang].heroButton}              </Link>
         </div>
 
         {/* Видео (на мобильных снизу) */}
@@ -90,7 +89,7 @@ export default function Home() {
     playsInline
     className="w-full h-full object-contain"
   />
-  <h1 className={`text-basec   sm:text-lg md:text-2xl lg:text-3xl opacity-80  md:w-[500px] ${oswald.className}`}>Demo - Наш Маскот , профи игрок в шутерах</h1>
+  <h1 className={`text-basec   sm:text-lg md:text-2xl lg:text-3xl opacity-80  md:w-[500px] ${oswald.className}`}>{translations[lang].heroMascotText}    </h1>
 </div>
     </div>
     </>
