@@ -28,7 +28,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
     <div className="fixed inset-0 z-[99999] flex items-center justify-center">
       {/* затемнение */}
       <div
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
       />
 

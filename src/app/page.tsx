@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRef, useEffect } from "react";
 import { Oswald } from "next/font/google";
 import Image from "next/image"
+import GameCarousel from '../app/GameCarousel'
 
 const oswald = Oswald({ 
   subsets: ['latin'], 
@@ -25,7 +26,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={`min-h-screen main-gradient  text-white flex  items-start px-4 sm:px-8 md:px-12 lg:px-24 py-8`}>
+    <div className={`min-h-screen main-gradient  text-white flex  items-start px-4 sm:px-8 md:px-12 lg:px-24 py-8 flex-col gap-[25px]`}>
 
       {/* ================= Hero / Main ================= */}
       {/* flex-col-reverse на мобильных, flex-row на md+ */}
@@ -59,18 +60,34 @@ export default function Home() {
         </div>
 
         {/* Видео (на мобильных снизу) */}
-        <div className="w-full md:w-1/2 h-60 sm:h-80 md:h-[600px] lg:h-[750px] overflow-hidden rounded-lg flex justify-center items-center bg-black">
-          <video
-            ref={videoRef}
-            src="/mascot.mp4"
-            autoPlay
-            loop
-            playsInline
-            className="w-full h-full object-contain"
-          />
-        </div>
+  <div className="w-full md:w-1/2 h-60 sm:h-80 md:h-[600px] lg:h-[750px] overflow-hidden rounded-lg flex justify-center items-center bg-black hidden md:flex">
+  <video
+    src="/mascot.mp4"
+    autoPlay
+    loop
+    
+    playsInline
+    className="w-full h-full object-contain"
+  />
+</div>
 
-      </main>
+        <div className=" w-[100%] md:hidden ">
+      <GameCarousel />
+    </div>
+      </main> 
+         <div className=" w-[100%] hidden md:flex ">
+      <GameCarousel />
+    </div>
+      <div className="w-full md:w-1/2 h-60 sm:h-80 md:h-[600px] lg:h-[750px] overflow-hidden rounded-lg flex justify-center items-center bg-black md:hidden flex-col py-4">
+  <video
+    src="/mascot.mp4"
+    autoPlay
+    loop
+    playsInline
+    className="w-full h-full object-contain"
+  />
+  <h1 className={`text-basec   sm:text-lg md:text-2xl lg:text-3xl opacity-80  md:w-[500px] ${oswald.className}`}>Demo - Наш Маскот , профи игрок в шутерах</h1>
+</div>
     </div>
   )
 }
