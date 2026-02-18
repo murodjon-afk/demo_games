@@ -163,7 +163,7 @@ export default function Header() {
             Игры
           </Link>
 
-          <Link href="/About" onClick={() => setMenuOpen(false)}
+          <Link href="/about" onClick={() => setMenuOpen(false)}
             className="hover:text-green-400 transition">
             О нас
           </Link>

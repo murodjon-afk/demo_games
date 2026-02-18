@@ -25,8 +25,12 @@ export default function Home() {
     }
   }, []);
 
+  
+  
+
   return (
-    <div className={`min-h-screen main-gradient  text-white flex  items-start px-4 sm:px-8 md:px-12 lg:px-24 py-8 flex-col gap-[25px]`}>
+    <>
+    <div className={`min-h-screen main-gradient  text-white flex  items-start px-4 sm:px-8 md:px-12 lg:px-24 py-8 flex-col gap-[25px] bg-black`}>
 
       {/* ================= Hero / Main ================= */}
       {/* flex-col-reverse на мобильных, flex-row на md+ */}
@@ -89,5 +93,6 @@ export default function Home() {
   <h1 className={`text-basec   sm:text-lg md:text-2xl lg:text-3xl opacity-80  md:w-[500px] ${oswald.className}`}>Demo - Наш Маскот , профи игрок в шутерах</h1>
 </div>
     </div>
+    </>
   )
 }

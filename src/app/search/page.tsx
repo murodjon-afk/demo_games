@@ -63,11 +63,13 @@ export default function SearchPage() {
             </div>
           </>
         ) : (
-          <div
-  className="grid gap-5 w-full justify-center"
-  style={{
-    gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-  }}
+        <div className="grid gap-5 w-full justify-center
+                grid-cols-3      /* ≤375px: 2 карточки в ряд */
+                sm:grid-cols-4   /* ≥640px: 3 карточки */
+                md:grid-cols-5   /* ≥768px: 4 карточки */
+                lg:grid-cols-6  /* ≥1024px: 5 карточки */
+                xl:grid-cols-7   /* ≥1280px: 6 карточки */
+                2xl:grid-cols-8" /* ≥1536px: 7 карточки */ 
 >
   {filteredGames.map((game) => (
     <Link
@@ -81,12 +83,13 @@ export default function SearchPage() {
         fill
         style={{ objectFit: 'cover' }}
       />
-      <div className="absolute bottom-0 w-full text-center font-bold text-sm bg-[rgba(26,26,26,0.85)] overflow-hidden whitespace-nowrap text-ellipsis px-2 py-1">
+      <div className="absolute bottom-0 w-full text-center font-bold text-sm bg-[rgba(26,26,26,0.85)] overflow-hidden whitespace-nowrap text-ellipsis px-2 py-1 text-white">
         {game.title}
       </div>
     </Link>
   ))}
 </div>
+
 
 
         )}

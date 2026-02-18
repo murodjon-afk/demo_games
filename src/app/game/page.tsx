@@ -87,6 +87,7 @@ export default function Home() {
                   whiteSpace: 'nowrap',
                   textOverflow: 'ellipsis',
                 }}
+                className='text-white'
               >
                 {game.title}
               </div>

@@ -24,7 +24,3 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-/* src/styles/globals.css */
-.main-gradient {
- background: black;
-}
