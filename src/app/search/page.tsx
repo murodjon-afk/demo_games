@@ -1,20 +1,19 @@
 'use client';
+import { useGames } from "../lib/useGames";
 
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { games } from "../data/games";
 import { translations } from "../translate/translation";
 import { useLanguage } from "../translate/LanguageContext";
 export default function SearchPage() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
     const { lang } = useLanguage();
+             const { games } = useGames();
 
-  // Получаем уникальные категории из данных games
   const categories = ["All", ...Array.from(new Set(games.map(g => g.category)))];
 
-  // Фильтруем игры по названию и категории
   const filteredGames = games.filter((game) => {
     const matchesQuery = game.title.toLowerCase().includes(query.toLowerCase());
     const matchesCategory = category === "All" || game.category === category;
@@ -24,12 +23,10 @@ export default function SearchPage() {
   return (
     <div className="bg-black min-h-screen font-sans px-5 py-10">
       <div className="w-[90%] mx-auto flex flex-col items-center text-left">
-        {/* Заголовок */}
         <h1 className="text-white font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-10 tracking-wide drop-shadow-[2px_2px_8px_rgba(0,0,0,0.7)]">
                    {translations[lang].toSearch}
         </h1>
 
-        {/* Поисковое поле и категории */}
         <div className="flex flex-col sm:flex-row gap-4 mb-10 w-full md:w-1/2">
           <input
             type="text"placeholder={translations[lang].gameName}
@@ -48,7 +45,6 @@ export default function SearchPage() {
           </select>
         </div>
 
-        {/* Сетка карточек */}
         {filteredGames.length === 0 ? (
           <>
             <p className="text-white/60 mb-5">Undefined</p>
@@ -65,12 +61,12 @@ export default function SearchPage() {
           </>
         ) : (
         <div className="grid gap-5 w-full justify-center
-                grid-cols-3      /* ≤375px: 2 карточки в ряд */
+                grid-cols-2      /* ≤375px: 2 карточки в ряд */
                 sm:grid-cols-4   /* ≥640px: 3 карточки */
                 md:grid-cols-5   /* ≥768px: 4 карточки */
                 lg:grid-cols-6  /* ≥1024px: 5 карточки */
                 xl:grid-cols-7   /* ≥1280px: 6 карточки */
-                2xl:grid-cols-8" /* ≥1536px: 7 карточки */ 
+                2xl:grid-cols-8" 
 >
   {filteredGames.map((game) => (
     <Link

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRef, useEffect  } from "react";
 import { Oswald } from "next/font/google";
 import Image from "next/image"
+
 import GameCarousel from '../app/GameCarousel'
 import { translations } from "./translate/translation";
 import { useLanguage } from "./translate/LanguageContext";
@@ -33,11 +34,9 @@ export default function Home() {
     <>
     <div className={`min-h-screen main-gradient  text-white flex  items-start px-4 sm:px-8 md:px-12 lg:px-24 py-8 flex-col gap-[25px] bg-black`}>
 
-      {/* ================= Hero / Main ================= */}
-      {/* flex-col-reverse на мобильных, flex-row на md+ */}
+  
       <main className="flex flex-col sm:flex-col md:flex-row items-center md:items-end space-y-6 sm:space-y-6 md:space-y-0 md:space-x-6 w-full">
 
-        {/* Текст и Лого (на мобильных сверху) */}
         <div className="flex flex-col items-start space-y-6 w-full md:w-1/2">
           <div className="w-40 h-40 sm:w-52 sm:h-52 md:w-60 md:h-60 relative rounded-full border-4 border-green-500 ">
             <Image
@@ -62,13 +61,12 @@ export default function Home() {
 {translations[lang].heroButton}              </Link>
         </div>
 
-        {/* Видео (на мобильных снизу) */}
   <div className="w-full md:w-1/2 h-60 sm:h-80 md:h-[600px] lg:h-[750px] overflow-hidden rounded-lg flex justify-center items-center bg-black hidden md:flex">
   <video
     src="/mascot.mp4"
     autoPlay
     loop
-    
+    muted
     playsInline
     className="w-full h-full object-contain"
   />
@@ -86,6 +84,7 @@ export default function Home() {
     src="/mascot.mp4"
     autoPlay
     loop
+    muted
     playsInline
     className="w-full h-full object-contain"
   />

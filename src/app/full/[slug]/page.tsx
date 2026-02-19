@@ -1,11 +1,12 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import { games } from '@/app/data/games';
+import { useGames } from "../../lib/useGames";
 
 export default function FullGamePage() {
   const { slug } = useParams();
   const router = useRouter();
+          const { games } = useGames();
 
   const game = games.find((g) => g.slug === slug);
 

@@ -4,12 +4,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
+import { useGames } from "./lib/useGames";
 
 import 'swiper/css'
 
-import { games } from '../app/data/games'
 
 export default function GameCarousel() {
+           const { games } = useGames();
+
   return (
     <div className="w-full py-4 overflow-hidden">
       <Swiper

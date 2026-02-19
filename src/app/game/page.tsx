@@ -2,12 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { games } from '../data/games';
+import { useGames } from "../lib/useGames";
+
 import { translations } from "../translate/translation";
 import { useLanguage } from "../translate/LanguageContext";
 export default function Home() {
         const { lang } = useLanguage();
-  
+         const { games } = useGames();
+
   return (
     <div
       style={{
@@ -31,16 +33,14 @@ export default function Home() {
 </h1>
 
 
-        {/* Сетка карточек */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-            gap: '20px',
-            width: '100%',
-          }}
-          className=' w-[100%]'
-        >
+         <div className="grid gap-5 w-full justify-center
+                grid-cols-2      /* ≤375px: 2 карточки в ряд */
+                sm:grid-cols-4   /* ≥640px: 3 карточки */
+                md:grid-cols-5   /* ≥768px: 4 карточки */
+                lg:grid-cols-6  /* ≥1024px: 5 карточки */
+                xl:grid-cols-7   /* ≥1280px: 6 карточки */
+                2xl:grid-cols-8" 
+>
           {games.map((game) => (
             <Link
               key={game.slug}

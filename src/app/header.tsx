@@ -1,17 +1,20 @@
 'use client'
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Oswald } from "next/font/google";
 import Link from "next/link";
 import Modal from "./modal";
 import { useLanguage } from "./translate/LanguageContext";
 import { translations } from "./translate/translation";
+import { useState, useRef, useEffect } from "react";
 
 const oswald = Oswald({ subsets: ['latin'], weight: ['400','500','700'] });
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+    const [menuOpen2, setMenuOpen2] = useState(false);
+     const dropdownRef = useRef<HTMLDivElement>(null);
+
   const [muted, setMuted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { lang, setLang } = useLanguage();
@@ -35,7 +38,22 @@ export default function Header() {
       else frame.removeAttribute("muted");
     });
   };
+   useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen2(false);
+      }
+    }
 
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <>
       <header className={`w-full flex justify-center bg-black relative ${oswald.className}`}>
@@ -80,20 +98,57 @@ export default function Header() {
             </button>
 
             {/* Переключатель языка */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setLang("ru")}
-                className={`px-2 py-1 rounded border ${lang === "ru" ? "border-green-500 text-green-500" : "border-gray-300 text-black"}`}
-              >
-                RU
-              </button>
-              <button
-                onClick={() => setLang("en")}
-                className={`px-2 py-1 rounded border ${lang === "en" ? "border-green-500 text-green-500" : "border-gray-300 text-black"}`}
-              >
-                EN
-              </button>
-            </div>
+        {/* Компактный переключатель языка с emoji */}
+{/* Современный переключатель языка */}
+    <div ref={dropdownRef} className="relative text-green-500">
+      {/* Кнопка */}
+      <button
+        onClick={() => setMenuOpen2((prev) => !prev)}
+        className="flex items-center justify-center w-[43px] h-[43px]
+                   bg-white border-2 cursor-pointer border-green-500 rounded-lg
+                   hover:bg-green-500 hover:text-black
+                   transition-all duration-200 text-lg
+                   max-[500px]:w-[35px] max-[500px]:h-[35px]"
+      >
+        {lang === "ru" && "RU"}
+        {lang === "en" && "ENG"}
+        {lang === "tj" && "TJ"}
+      </button>
+
+      {/* Dropdown */}
+      {menuOpen2 && (
+        <div
+          className="absolute right-0 mt-2 w-[60px]
+                     bg-white border-2 border-green-500 rounded-lg
+                     shadow-lg overflow-hidden z-[9999]"
+        >
+          <button
+            onClick={() => { setLang("ru"); setMenuOpen2(false); }}
+            className="w-full h-[40px] flex items-center justify-center
+                       hover:bg-green-500 hover:text-black transition"
+          >
+            RU
+          </button>
+
+          <button
+            onClick={() => { setLang("en"); setMenuOpen2(false); }}
+            className="w-full h-[40px] flex items-center justify-center
+                       hover:bg-green-500 hover:text-black transition"
+          >
+            ENG
+          </button>
+
+          <button
+            onClick={() => { setLang("tj"); setMenuOpen2(false); }}
+            className="w-full h-[40px] flex items-center justify-center
+                       hover:bg-green-500 hover:text-black transition"
+          >
+            TJ
+          </button>
+        </div>
+      )}
+    </div>
+
 
             {/* Burger */}
             <button

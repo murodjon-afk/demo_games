@@ -56,7 +56,6 @@ export const games = [
     iframeSrc: "https://www.madkidgames.com/full/beat-the-puppet",
     thumbnail: "https://www.madkidgames.com/games/beat-the-puppet/thumb_2.jpg"
   },
-  // Новый объект
   {
     title: "Stickman Revenge 3: Ninja Warrior",
     slug: "stickman-revenge-3",
