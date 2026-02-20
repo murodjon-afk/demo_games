@@ -6,9 +6,17 @@ import { useGames } from "../lib/useGames";
 
 import { translations } from "../translate/translation";
 import { useLanguage } from "../translate/LanguageContext";
+
+import { Skeleton } from "@/components/ui/skeleton";
+
 export default function Home() {
-        const { lang } = useLanguage();
-         const { games } = useGames();
+
+  const { lang } = useLanguage();
+  const { games } = useGames();
+
+  const isLoading = !games || games.length === 0;
+
+  const skeletonCount = 32;
 
   return (
     <div
@@ -19,6 +27,7 @@ export default function Home() {
         fontFamily: 'Arial, sans-serif',
       }}
     >
+
       <div
         style={{
           margin: '0 auto',
@@ -26,77 +35,104 @@ export default function Home() {
           flexDirection: 'column',
           alignItems: 'center',
         }}
-        className=' w-[90%] text-left'
+        className='w-[90%] text-left'
       >
-    <h1 className="text-white font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-left mb-10 tracking-wide drop-shadow-[2px_2px_8px_rgba(0,0,0,0.7)]">
-  {translations[lang].games}    
-</h1>
+
+        <h1 className="text-white font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-left mb-10 tracking-wide drop-shadow-[2px_2px_8px_rgba(0,0,0,0.7)]">
+          {translations[lang].games}
+        </h1>
 
 
-         <div className="grid gap-5 w-full justify-center
-                grid-cols-2      /* ≤375px: 2 карточки в ряд */
-                sm:grid-cols-4   /* ≥640px: 3 карточки */
-                md:grid-cols-5   /* ≥768px: 4 карточки */
-                lg:grid-cols-6  /* ≥1024px: 5 карточки */
-                xl:grid-cols-7   /* ≥1280px: 6 карточки */
-                2xl:grid-cols-8" 
->
-          {games.map((game) => (
+        <div className="grid gap-5 w-full justify-center
+          grid-cols-2
+          sm:grid-cols-4
+          md:grid-cols-5
+          lg:grid-cols-6
+          xl:grid-cols-7
+          2xl:grid-cols-8"
+        >
+
+          {/* SKELETON */}
+          {isLoading && Array.from({ length: skeletonCount }).map((_, index) => (
+
+            <div
+              key={index}
+              className="
+                relative
+                w-full
+                aspect-square
+                rounded-xl
+                overflow-hidden
+                bg-green-500
+                border border-green-400
+                shadow-md shadow-green-500/20
+              "
+            >
+
+              {/* image skeleton */}
+              <Skeleton className="absolute inset-0 bg-green-400/50 animate-pulse" />
+
+              {/* title skeleton */}
+              <div className="absolute bottom-0 w-full bg-black px-2 py-2 flex justify-center">
+                <Skeleton className="h-4 w-[70%] bg-black/80 animate-pulse" />
+              </div>
+
+            </div>
+
+          ))}
+
+
+          {/* REAL GAMES */}
+          {!isLoading && games.map((game) => (
+
             <Link
               key={game.slug}
               href={`/game/${game.slug}`}
-              style={{
-                position: 'relative',
-                width: '100%',
-                aspectRatio: '1 / 1',
-                borderRadius: '12px',
-                overflow: 'hidden',
-                textDecoration: 'none',
-                color: '#fff',
-                backgroundColor: '#111',
-                cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.6)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLAnchorElement;
-                el.style.transform = 'scale(1.05)';
-                el.style.boxShadow = '0 8px 20px rgba(0,0,0,0.8)';
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLAnchorElement;
-                el.style.transform = 'scale(1)';
-                el.style.boxShadow = '0 4px 12px rgba(0,0,0,0.6)';
-              }}
+              className="
+                relative
+                w-full
+                aspect-square
+                rounded-xl
+                overflow-hidden
+                bg-black
+                border border-green-500
+                shadow-md shadow-black
+                hover:scale-105
+                hover:shadow-lg
+                hover:shadow-green-500/40
+                transition-all duration-200
+              "
             >
+
               <Image
                 src={game.thumbnail}
                 alt={game.title}
                 fill
-                style={{ objectFit: 'cover' }}
+                className="object-cover"
               />
 
               <div
-                style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  width: '100%',
-                  padding: '8px',
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                  fontSize: '14px',
-                  background: 'rgba(26,26,26,0.85)',
-                  overflow: 'hidden',
-                  whiteSpace: 'nowrap',
-                  textOverflow: 'ellipsis',
-                }}
-                className='text-white'
+                className="
+                  absolute bottom-0 w-full
+                  px-2 py-2
+                  text-center
+                  font-bold
+                  text-sm
+                  bg-black/80
+                  text-black
+                  truncate
+                  text-white
+                "
               >
                 {game.title}
               </div>
+
             </Link>
+
           ))}
+
         </div>
+
       </div>
     </div>
   );

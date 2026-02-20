@@ -76,13 +76,13 @@ export default function Header() {
           </nav>
 
           {/* Правая часть */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 ">
 
             {/* Кнопка Mute */}
             <button
               onClick={() => muteAll()}
               className="flex items-center justify-center w-[43px] h-[43px] text-xl bg-gray-200 rounded-lg hover:bg-gray-300 transition cursor-pointer
-                        max-[500px]:w-[35px] max-[500px]:h-[35px] max-[500px]:text-lg"
+                        max-[500px]:w-[35px] max-[500px]:h-[35px] max-[500px]:text-lg "
               title={muted ? "Muted" : "Sound On"}
             >
               {muted ? "🔇" : "🔊"}
@@ -91,7 +91,7 @@ export default function Header() {
             {/* Контакты */}
             <button
               className="flex items-center justify-center w-[43px] h-[43px] text-xl bg-gray-200 rounded-lg hover:bg-gray-300 transition cursor-pointer
-                        max-[500px]:w-[35px] max-[500px]:h-[35px] max-[500px]:text-lg"
+                        max-[500px]:w-[35px] max-[500px]:h-[35px] max-[500px]:text-lg  hidden sm:flex"
               onClick={() => setIsModalOpen(true)}
             >
               📞
@@ -187,12 +187,60 @@ export default function Header() {
           </button>
         </div>
 
-        <nav className="flex flex-col items-center justify-center space-y-8 text-2xl font-semibold mt-10">
-          <Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-green-400 transition">{translations[lang].home}</Link>
-          <Link href="/game" onClick={() => setMenuOpen(false)} className="hover:text-green-400 transition">{translations[lang].games}</Link>
-          <Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-green-400 transition">{translations[lang].about}</Link>
-          <Link href="/search" onClick={() => setMenuOpen(false)} className="hover:text-green-400 transition">{translations[lang].search}</Link>
-        </nav>
+        <nav className="flex flex-col items-center justify-center space-y-5 text-2xl font-semibold mt-10">
+
+  <Link
+    href="/"
+    onClick={() => setMenuOpen(false)}
+    className="hover:text-green-400 transition"
+  >
+    {translations[lang].home}
+  </Link>
+
+  <Link
+    href="/game"
+    onClick={() => setMenuOpen(false)}
+    className="hover:text-green-400 transition"
+  >
+    {translations[lang].games}
+  </Link>
+
+  <Link
+    href="/about"
+    onClick={() => setMenuOpen(false)}
+    className="hover:text-green-400 transition"
+  >
+    {translations[lang].about}
+  </Link>
+
+  <Link
+    href="/search"
+    onClick={() => setMenuOpen(false)}
+    className="hover:text-green-400 transition"
+  >
+    {translations[lang].search}
+  </Link>
+
+  {/* текст-кнопка */}
+  <button
+    onClick={() => {
+      setMenuOpen(false)
+      setIsModalOpen(true)
+    }}
+    className="
+      text-2xl font-semibold
+      hover:text-green-400
+      transition
+      cursor-pointer
+      bg-transparent
+      border-none
+      p-0
+    "
+  >
+    Контакты
+  </button>
+
+</nav>
       </div>
 
       {/* Модалка контактов */}
